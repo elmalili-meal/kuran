@@ -11,6 +11,11 @@ sadeliği, renkleri, tipografisi ve sayfa yapısı bilinçli olarak korunmuştur
 ## Kullanılan anlık görüntü
 
 - Kaynak: <http://enfal.de/m_elmalili_index.htm> (şu an erişime kapalı)
+- **Asıl kaynak: `kuranikerim.com`.** Arşivlenen `enfal.de` sayfaları,
+  kaynak kodundaki HTTrack yorumunun da gösterdiği gibi `kuranikerim.com`
+  sitesinden kopyalanmıştır; dizin sayfası bunu görünür bir
+  "kaynak: kuranikerim.com" satırıyla da belirtiyordu. Bu site de bugün
+  erişime kapalıdır.
 - Snapshot: <https://web.archive.org/web/20240919080311/http://enfal.de/m_elmalili_index.htm>
 - Dizin sayfası 19 Eylül 2024 tarihli capture'dan; sure sayfaları Wayback'in aynı
   URL için verdiği 28 Eylül 2022 tarihli capture'lardan alınmıştır.
@@ -165,6 +170,7 @@ Aşağıdakiler dışında sayfalar arşivdeki hâliyle aynıdır:
 | Her sayfanın sağ altına README'ye giden "Kaynak" bağlantısı eklendi | Talep üzerine; provenansın sayfadan tek tıkla görülebilmesi için |
 | `<html lang="tr">`, `<link rel="canonical">` ve sayfaya özel `<meta name="description">` eklendi | Arama motoru indekslemesi için. Üçü de görünmez etiketlerdir; sayfanın görünümünde hiçbir değişiklik yapmazlar. |
 | `sitemap.xml`, `robots.txt` ve `.nojekyll` dosyaları eklendi | Arama motoru indekslemesi ve GitHub Pages için |
+| Dizin sayfasının sağ altındaki görünür "kaynak: kuranikerim.com" satırı kaldırıldı | Talep üzerine; o site de artık erişilebilir değil. Kaynağın kaydı bu README'de ve her sayfanın kaynak kodundaki HTTrack yorumunda durmaktadır. |
 | `<meta name="description">` ve `<meta name="keywords">` sadeleştirildi | Talep üzerine. Orijinalleri 2000'lerin başına ait, anahtar kelime yığını hâlindeki uzun etiketlerdi. |
 | Tüm `<script>` blokları kaldırıldı | Sayfalardaki tek JavaScript, 7 sure sayfasında kalmış "arkadaşına tavsiye et" formu doğrulama kodudur. Bu formun `<form>` etiketi hiçbir sayfada mevcut değildir — HTTrack kopyalamasından artakalan, hiçbir işlevi olmayan ölü koddur. |
 | Karakter seti UTF-8'e çevrildi | `windows-1254` bayt dizisi, `charset=utf-8` başlığı gönderen modern statik sunucularda bozuk görünüyor. Görünen metin birebir aynıdır. |

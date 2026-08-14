@@ -23,6 +23,11 @@ TAGS = re.compile(r'<[^>]+>')
 # silently swallowed by this check.
 FOOTER_TEXT = re.compile(r'\s*Kaynak\s*$')
 
+# The one piece of visible text deliberately dropped from the original: the
+# index page's "kaynak: kuranikerim.com" credit. Removed from both sides of the
+# comparison so the rest of the page is still held to exact equality.
+REMOVED_CREDIT = re.compile(r'\s*kaynak:\s*kuranikerim\.com', re.I)
+
 
 def visible(html: str) -> str:
     html = DROP.sub(" ", html)
@@ -31,6 +36,7 @@ def visible(html: str) -> str:
                 .replace("&lt;", "<").replace("&gt;", ">").replace("&quot;", '"'))
     text = unicodedata.normalize("NFC", text)
     text = re.sub(r'\s+', " ", text).strip()
+    text = REMOVED_CREDIT.sub("", text)
     return FOOTER_TEXT.sub("", text)
 
 

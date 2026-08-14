@@ -74,6 +74,14 @@ RESTORED_DATE = "2026-08-14"
 
 HTML_OPEN = re.compile(r'<html\b[^>]*>', re.I)
 
+# The index page carried a visible "kaynak: kuranikerim.com" credit line at the
+# bottom right. Removed by request: that site is no longer reachable, so the
+# credit points nowhere. The origin is still recorded in the README's provenance
+# section and in the HTTrack comment left in every page's source.
+OLD_CREDIT = re.compile(
+    r'\s*<p align="right"><font color="#FFFFFF">kaynak: kuranikerim\.com</font></p>',
+    re.I)
+
 
 def strip_header_graphics(html: str) -> str:
     """Drop the three tables that only exist to carry the banner images:
@@ -139,6 +147,7 @@ def convert(src: Path, depth: int, canonical: str = "", description: str = "") -
     html = META_DESCRIPTION.sub(NEW_DESCRIPTION, html, count=1)
     html = META_KEYWORDS.sub(NEW_KEYWORDS, html, count=1)
     html = add_seo(html, canonical, description)
+    html = OLD_CREDIT.sub("", html, count=1)
     html = strip_header_graphics(html)
     html = add_footer(html)
     # one UTF-8 declaration in place of the two legacy ones
