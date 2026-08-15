@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /archive_original/
 Disallow: /tools/
 
 Sitemap: https://elmalili-meal.github.io/kuran/sitemap.xml

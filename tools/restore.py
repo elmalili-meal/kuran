@@ -187,13 +187,16 @@ def write_sitemap(rel_paths) -> None:
 
 
 def write_robots() -> None:
-    """Permit crawling of the site, but keep crawlers out of the working
-    directories: archive_original/ holds raw copies of the very same pages, and
-    indexing those would compete with the restored ones as duplicate content."""
+    """Permit crawling and point at the sitemap.
+
+    Note: for a GitHub Pages *project* site this file lives at /kuran/robots.txt,
+    while crawlers only ever read the domain root (/robots.txt). So these rules
+    are advisory at best — the real protection is that nothing links to the
+    working directories and they are absent from the sitemap.
+    """
     (DST / "robots.txt").write_text(
         "User-agent: *\n"
         "Allow: /\n"
-        "Disallow: /archive_original/\n"
         "Disallow: /tools/\n"
         f"\nSitemap: {BASE_URL}sitemap.xml\n", encoding="utf-8")
 

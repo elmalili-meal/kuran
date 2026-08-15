@@ -56,7 +56,10 @@ navigasyon eklenmemiştir.
 
 1. `tools/fetch_archive.sh` — dizin sayfasını ve 114 sure sayfasını Wayback
    Machine'den indirir; ham hâlleriyle `archive_original/` altında saklanır
-   (kanıt kopyası, hiç değiştirilmez). Görseller bilinçli olarak indirilmez.
+   (hiç değiştirilmez). Bu klasör **depoya dahil değildir**: yayımlanan sayfalarla
+   birebir aynı içeriği taşıdığı için yalnızca yerelde tutulur. Betikleri
+   çalıştırmak isteyen önce bu adımla klasörü yeniden oluşturur.
+   Görseller bilinçli olarak indirilmez.
    `web.archive.org` istekleri sınırladığı için indirme yavaş tempoludur ve
    eksik kalanları birkaç geçişte tamamlar.
 2. `tools/restore.py` — `archive_original/` içeriğinden yayımlanan sayfaları
@@ -99,7 +102,6 @@ sitemap.xml               arama motorları için sayfa listesi (115 adres)
 robots.txt                tarama kuralları + sitemap adresi
 links.txt                 114 sure sayfasının listesi
 tools/                    indirme, üretme ve doğrulama betikleri
-archive_original/         arşivden inen ham dosyalar (kanıt kopyası)
 ```
 
 ## Yerelde çalıştırma
@@ -125,10 +127,12 @@ seçilip kaydedilir. Bir iki dakika içinde site şu adreste yayına girer:
 https://elmalili-meal.github.io/kuran/
 ```
 
-Not: GitHub Pages tüm depoyu yayımlar; `archive_original/` ve `tools/` de bu
-adres üzerinden erişilebilir olur. Sakıncası yoktur — ikisi de zaten deponun
-herkese açık içeriğidir — ancak yalnızca site dosyalarının yayımlanması
-istenirse bu iki klasörün ayrı bir dala taşınması gerekir.
+Not: GitHub Pages tüm depoyu yayımlar; `tools/` klasörü de bu adres üzerinden
+erişilebilir olur. Sakıncası yoktur, zaten deponun herkese açık içeriğidir.
+`robots.txt` bu klasörü taramaya kapatır; ancak proje sitelerinde tarayıcılar
+yalnızca alan adı kökündeki `/robots.txt` dosyasını okuduğu için bu kural
+fiilen tavsiye niteliğindedir. Asıl koruma, bu klasöre hiçbir bağlantı
+verilmemesi ve `sitemap.xml` içinde yer almamasıdır.
 
 `index.html` ile `m_elmalili_index.htm` aynı içeriktedir: ilki sunucuların kök
 dizin için varsayılan olarak aradığı ad, ikincisi orijinal dosya adıdır (eski
@@ -170,6 +174,7 @@ Aşağıdakiler dışında sayfalar arşivdeki hâliyle aynıdır:
 | Her sayfanın sağ altına README'ye giden "Kaynak" bağlantısı eklendi | Talep üzerine; provenansın sayfadan tek tıkla görülebilmesi için |
 | `<html lang="tr">`, `<link rel="canonical">` ve sayfaya özel `<meta name="description">` eklendi | Arama motoru indekslemesi için. Üçü de görünmez etiketlerdir; sayfanın görünümünde hiçbir değişiklik yapmazlar. |
 | `sitemap.xml`, `robots.txt` ve `.nojekyll` dosyaları eklendi | Arama motoru indekslemesi ve GitHub Pages için |
+| `archive_original/` klasörü depodan çıkarıldı | Yayımlanan sayfalarla aynı içeriğin ikinci bir kopyası olduğu için. Yeniden indirmek için `tools/fetch_archive.sh` yeterlidir. |
 | Dizin sayfasının sağ altındaki görünür "kaynak: kuranikerim.com" satırı kaldırıldı | Talep üzerine; o site de artık erişilebilir değil. Kaynağın kaydı bu README'de ve her sayfanın kaynak kodundaki HTTrack yorumunda durmaktadır. |
 | `<meta name="description">` ve `<meta name="keywords">` sadeleştirildi | Talep üzerine. Orijinalleri 2000'lerin başına ait, anahtar kelime yığını hâlindeki uzun etiketlerdi. |
 | Tüm `<script>` blokları kaldırıldı | Sayfalardaki tek JavaScript, 7 sure sayfasında kalmış "arkadaşına tavsiye et" formu doğrulama kodudur. Bu formun `<form>` etiketi hiçbir sayfada mevcut değildir — HTTrack kopyalamasından artakalan, hiçbir işlevi olmayan ölü koddur. |
