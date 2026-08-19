@@ -69,8 +69,11 @@ def main() -> int:
               f"{' …' if len(missing) > 8 else ''}")
         failures += len(missing)
 
-    if not check("m_elmalili_index.htm", SRC / "m_elmalili_index.htm",
-                 DST / "m_elmalili_index.htm"):
+    # m_elmalili_index.htm is no longer a copy of the index: it is a redirect
+    # stub, so it is checked for redirect behaviour rather than for text.
+    stub = (DST / "m_elmalili_index.htm").read_text(encoding="utf-8")
+    if "http-equiv=\"refresh\"" not in stub or "rel=\"canonical\"" not in stub:
+        print("m_elmalili_index.htm is not a valid redirect stub")
         failures += 1
 
     for rel in expected:

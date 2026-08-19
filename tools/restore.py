@@ -74,6 +74,21 @@ RESTORED_DATE = "2026-08-14"
 
 HTML_OPEN = re.compile(r'<html\b[^>]*>', re.I)
 
+# Stand-in for the original index filename: redirects to the site root.
+REDIRECT_STUB = f"""<html lang="tr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="refresh" content="0; url={BASE_URL}">
+<link rel="canonical" href="{BASE_URL}">
+<title>KURAN'I KERİM, ELMALILI TÜRKÇE MEALİ</title>
+</head>
+<body bgcolor="#1F57A1" text="#FFFFFF">
+<p><font face="Verdana, Arial, Helvetica, sans-serif" size="2">
+<a href="{BASE_URL}">KURAN'I KERİM, ELMALILI TÜRKÇE MEALİ</a></font></p>
+</body>
+</html>
+"""
+
 # The index page carried a visible "kaynak: kuranikerim.com" credit line at the
 # bottom right. Removed by request: that site is no longer reachable, so the
 # credit points nowhere. The origin is still recorded in the README's provenance
@@ -215,8 +230,12 @@ def main():
     idx = convert(SRC / "m_elmalili_index.htm", depth=0, canonical=BASE_URL,
                   description="Elmalili M.hamdi Yazir'in Turkce Kur'an meali — "
                               "114 surenin tam metni, sure indeksi.")
-    (DST / "m_elmalili_index.htm").write_text(idx, encoding="utf-8")
     (DST / "index.html").write_text(idx, encoding="utf-8")
+    # The original filename is kept as a redirect rather than a second copy of
+    # the page. Serving identical content at two addresses made Google treat
+    # them as duplicates and pick its own canonical; a redirect leaves old
+    # links working while giving search engines exactly one page to index.
+    (DST / "m_elmalili_index.htm").write_text(REDIRECT_STUB, encoding="utf-8")
 
     labels = surah_labels(idx)  # {"melmalili/fatiha.htm": "1-Fatiha", ...}
     pages = sorted((SRC / "melmalili").glob("*.htm"))
