@@ -8,6 +8,7 @@ The only changes made to each archived page are:
   3. re-encoding the bytes from windows-1254 to UTF-8 (+ matching <meta charset>)
   4. removal of the three graphical header tables (text-only restoration, by request)
   5. a small source/provenance line added bottom-right of every page
+  6. a <script> tag loading tema.js (dark background toggle, top right)
 
 Markup, attributes, whitespace and the Turkish text itself are left untouched.
 """
@@ -122,6 +123,20 @@ def add_footer(html: str) -> str:
     return html[:i] + FOOTER + html[i:]
 
 
+def add_theme(html: str, depth: int) -> str:
+    """Load tema.js, which adds the top-right dark background toggle.
+
+    Sits in <head> so a stored dark choice applies before the first paint.
+    The default look stays the original blue; tema.js is hand-written and
+    lives at the repository root, outside GENERATED.
+    """
+    m = re.search(r'</head>', html, re.I)
+    if not m:
+        return html
+    tag = f'<script src="{"../" * depth}tema.js"></script>\n'
+    return html[:m.start()] + tag + html[m.start():]
+
+
 def add_seo(html: str, canonical: str, description: str) -> str:
     """Declare the page language and its canonical address.
 
@@ -162,6 +177,7 @@ def convert(src: Path, depth: int, canonical: str = "", description: str = "") -
     html = META_DESCRIPTION.sub(NEW_DESCRIPTION, html, count=1)
     html = META_KEYWORDS.sub(NEW_KEYWORDS, html, count=1)
     html = add_seo(html, canonical, description)
+    html = add_theme(html, depth)
     html = OLD_CREDIT.sub("", html, count=1)
     html = strip_header_graphics(html)
     html = add_footer(html)

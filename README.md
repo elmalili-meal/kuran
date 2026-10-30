@@ -100,6 +100,7 @@ melmalili/<sure>.htm      114 sure sayfası
 README.md
 sitemap.xml               arama motorları için sayfa listesi (115 adres)
 robots.txt                tarama kuralları + sitemap adresi
+tema.js                   sağ üstteki koyu arka plan düğmesi
 links.txt                 114 sure sayfasının listesi
 tools/                    indirme, üretme ve doğrulama betikleri
 ```
@@ -180,6 +181,7 @@ Aşağıdakiler dışında sayfalar arşivdeki hâliyle aynıdır:
 | Tüm `<script>` blokları kaldırıldı | Sayfalardaki tek JavaScript, 7 sure sayfasında kalmış "arkadaşına tavsiye et" formu doğrulama kodudur. Bu formun `<form>` etiketi hiçbir sayfada mevcut değildir — HTTrack kopyalamasından artakalan, hiçbir işlevi olmayan ölü koddur. |
 | Karakter seti UTF-8'e çevrildi | `windows-1254` bayt dizisi, `charset=utf-8` başlığı gönderen modern statik sunucularda bozuk görünüyor. Görünen metin birebir aynıdır. |
 | `index.html` kopyası eklendi | Statik sunucuların kök dizin varsayılanı |
+| Her sayfanın sağ üstüne koyu arka plan düğmesi eklendi (`tema.js`) | Talep üzerine. Varsayılan görünüm orijinal mavidir; düğme arka planı koyuya çevirir, seçim tarayıcıda hatırlanır. Metne dokunmaz, düğme JavaScript ile eklenir. |
 
 Altı görsel bu depoda **hiç bulunmamaktadır** — sayfalarda kullanılmadıkları
 gibi `archive_original/` altında da saklanmamaktadır. Kullanılmayan, üstelik
@@ -194,7 +196,7 @@ Gerekirse arşivdeki asıllarına şu adresten ulaşılabilir:
   çıpaları (`<a name="N">`), dizin tablosundaki sure adları ve sıralaması.
 - **Bu restorasyonda yazılan:** `README.md`, `tools/fetch_archive.sh`,
   `tools/restore.py`, `tools/verify.py`, `links.txt`, `sitemap.xml`,
-  `robots.txt`, sayfaların sağ altındaki "Kaynak" bağlantısı ve
+  `robots.txt`, `tema.js` (sağ üstteki koyu tema düğmesi), sayfaların sağ altındaki "Kaynak" bağlantısı ve
   arama motorlarına yönelik görünmez etiketler.
 - **Depoya hiç alınmayan:** 6 görsel (ve onları taşıyan başlık tabloları);
   ayrıca Wayback Machine'in enjekte ettiği script/stil blokları ile orijinal
