@@ -8,6 +8,8 @@
   var style = document.createElement("style");
   style.textContent =
     "html.koyu body, html.koyu [bgcolor] { background-color: #121212 !important; }" +
+    // Ayetler <b> içinde; koyu zeminde kalın beyaz yazı ağır durduğu için normal kalınlıkta.
+    "html.koyu b, html.koyu strong { font-weight: normal; }" +
     "html.koyu table, html.koyu td, html.koyu tr { border-color: #555 !important; }" +
     "#tema-dugme { position: fixed; top: 8px; right: 8px; z-index: 1000;" +
     " width: 36px; height: 36px; padding: 0; border: 1px solid #CCCCCC;" +
